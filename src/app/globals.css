@@ -1,26 +1,99 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ===================================
+   Design System — Dia dos Namorados
+   =================================== */
 
 @theme inline {
+  /* Color palette — romantic, warm tones */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Fonts */
+  --font-display: var(--font-playfair-display);
+  --font-sans: var(--font-inter);
 }
 
+:root {
+  --background: #fdf6f0;
+  --foreground: #2d1b14;
+
+  /* Accent colors */
+  --rose-50: #fff1f2;
+  --rose-100: #ffe4e6;
+  --rose-200: #fecdd3;
+  --rose-300: #fda4af;
+  --rose-400: #fb7185;
+  --rose-500: #f43f5e;
+  --rose-600: #e11d48;
+  --rose-700: #be123c;
+
+  --blush-50: #fef2f8;
+  --blush-100: #fde6f2;
+  --blush-200: #fccee7;
+  --blush-300: #fba6d2;
+  --blush-400: #f772b3;
+  --blush-500: #ef4896;
+  --blush-600: #df2676;
+
+  --gold-100: #fef3c7;
+  --gold-200: #fde68a;
+  --gold-300: #fcd34d;
+  --gold-400: #fbbf24;
+  --gold-500: #f59e0b;
+
+  /* Gradients */
+  --gradient-romantic: linear-gradient(135deg, #fda4af 0%, #f772b3 50%, #e879a8 100%);
+  --gradient-warm: linear-gradient(135deg, #fdf6f0 0%, #fef2f8 50%, #fff1f2 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(253, 246, 240, 0) 0%, rgba(253, 246, 240, 0.8) 100%);
+  --gradient-dark-hero: linear-gradient(180deg, rgba(15, 5, 15, 0) 0%, rgba(15, 5, 15, 0.8) 100%);
+}
+
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f050f;
+    --foreground: #f5e6ef;
+
+    --gradient-warm: linear-gradient(135deg, #1a0a15 0%, #15051a 50%, #1a0510 100%);
+    --gradient-hero: var(--gradient-dark-hero);
   }
 }
 
+/* Base styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, "Inter", sans-serif);
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--rose-200);
+  color: var(--rose-700);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rose-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rose-400);
 }
