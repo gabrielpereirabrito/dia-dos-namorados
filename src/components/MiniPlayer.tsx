@@ -334,36 +334,57 @@ function TrackItem({
   return (
     <button
       onClick={handleClick}
-      className={`w-full flex items-center gap-3 px-2 py-1.5 rounded-lg text-left transition-colors ${
+      className={`group w-full flex items-center gap-3 px-2 py-1.5 rounded-lg text-left transition-colors ${
         isActive
           ? "bg-rose-500/15 text-white"
           : "text-rose-200/60 hover:text-white hover:bg-white/5"
       }`}
     >
-      {/* Track number / playing indicator */}
-      <span className="w-5 text-center text-xs flex-shrink-0">
-        {isPlaying ? (
-          <span className="flex gap-0.5 items-end justify-center h-3">
-            <motion.span
-              className="w-0.5 bg-rose-400 rounded-full"
-              animate={{ height: ["4px", "12px", "4px"] }}
-              transition={{ duration: 0.8, repeat: Infinity, delay: 0 }}
-            />
-            <motion.span
-              className="w-0.5 bg-rose-400 rounded-full"
-              animate={{ height: ["8px", "4px", "8px"] }}
-              transition={{ duration: 0.8, repeat: Infinity, delay: 0.2 }}
-            />
-            <motion.span
-              className="w-0.5 bg-rose-400 rounded-full"
-              animate={{ height: ["4px", "12px", "4px"] }}
-              transition={{ duration: 0.8, repeat: Infinity, delay: 0.4 }}
-            />
-          </span>
+      {/* Capa da música / Indicador de reprodução */}
+      <div className="relative w-8 h-8 rounded-md overflow-hidden flex-shrink-0 flex items-center justify-center bg-white/5 border border-white/10">
+        {song.cover ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={song.cover}
+            alt={song.title}
+            className="w-full h-full object-cover"
+          />
         ) : (
-          <span className="text-rose-200/30">{index + 1}</span>
+          <MusicNoteIcon className="w-4 h-4 text-rose-300/60" />
         )}
-      </span>
+
+        {/* Overlay para faixa ativa (tocando/pausada) */}
+        {isActive ? (
+          <div className="absolute inset-0 bg-rose-950/70 backdrop-blur-[1px] flex items-center justify-center">
+            {isPlaying ? (
+              <span className="flex gap-0.5 items-end justify-center h-3">
+                <motion.span
+                  className="w-0.5 bg-rose-400 rounded-full"
+                  animate={{ height: ["4px", "12px", "4px"] }}
+                  transition={{ duration: 0.8, repeat: Infinity, delay: 0 }}
+                />
+                <motion.span
+                  className="w-0.5 bg-rose-400 rounded-full"
+                  animate={{ height: ["8px", "4px", "8px"] }}
+                  transition={{ duration: 0.8, repeat: Infinity, delay: 0.2 }}
+                />
+                <motion.span
+                  className="w-0.5 bg-rose-400 rounded-full"
+                  animate={{ height: ["4px", "12px", "4px"] }}
+                  transition={{ duration: 0.8, repeat: Infinity, delay: 0.4 }}
+                />
+              </span>
+            ) : (
+              <PlayIcon className="w-3.5 h-3.5 text-rose-300" />
+            )}
+          </div>
+        ) : (
+          /* Overlay de hover com botão de play para faixas inativas */
+          <div className="absolute inset-0 bg-rose-950/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <PlayIcon className="w-3.5 h-3.5 text-white" />
+          </div>
+        )}
+      </div>
 
       <div className="flex-1 min-w-0">
         <p className="text-sm truncate">{song.title}</p>
