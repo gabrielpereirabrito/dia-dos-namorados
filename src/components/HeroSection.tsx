@@ -24,10 +24,10 @@ export default function HeroSection() {
   const handleStart = () => {
     activate();
 
-    // Smooth scroll to the timeline section after a brief delay
+    // Smooth scroll to the counter section after a brief delay
     setTimeout(() => {
-      const timeline = document.getElementById("timeline");
-      timeline?.scrollIntoView({ behavior: "smooth" });
+      const counter = document.getElementById("counter");
+      counter?.scrollIntoView({ behavior: "smooth" });
     }, 400);
   };
 

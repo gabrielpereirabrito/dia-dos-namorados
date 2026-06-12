@@ -29,6 +29,45 @@ export interface Song {
   cover?: string; // Imagem de capa opcional
 }
 
+// --- Contador de Tempo Juntos ---
+export interface CounterSection {
+  sectionTitle: string;
+  sectionSubtitle: string;
+  startDate: string; // ISO 8601, ex: "2021-02-05"
+}
+
+// --- Potinho de Amor ---
+export interface LoveNote {
+  id: string;
+  message: string;
+}
+
+export interface LoveJarSection {
+  sectionTitle: string;
+  sectionSubtitle: string;
+  clickPrompt: string;
+  nextNoteText: string;
+  notes: LoveNote[];
+}
+
+// --- Vale Presentes ---
+export interface GiftVoucher {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  color?: string;
+}
+
+export interface VouchersSection {
+  sectionTitle: string;
+  sectionSubtitle: string;
+  redeemButtonText: string;
+  redeemedLabel: string;
+  undoRedeemText?: string;
+  vouchers: GiftVoucher[];
+}
+
 export interface SiteContent {
   // --- Metadados ---
   meta: {
@@ -45,21 +84,30 @@ export interface SiteContent {
     backgroundImage?: string;
   };
 
-  // --- Secção 2: Linha do Tempo / Os Nossos Momentos ---
+  // --- Secção 2: Contador de Tempo Juntos ---
+  counter: CounterSection;
+
+  // --- Secção 3: Linha do Tempo / Os Nossos Momentos ---
   timeline: {
     sectionTitle: string;
     sectionSubtitle: string;
     moments: Moment[];
   };
 
-  // --- Secção 3: Galeria de Fotos ---
+  // --- Secção 4: Galeria de Fotos ---
   gallery: {
     sectionTitle: string;
     sectionSubtitle: string;
     photos: GalleryPhoto[];
   };
 
-  // --- Secção 4: Cartão de Amor / Mensagem Final ---
+  // --- Secção 5: Potinho de Amor ---
+  loveJar: LoveJarSection;
+
+  // --- Secção 6: Vale Presentes ---
+  vouchers: VouchersSection;
+
+  // --- Secção 7: Cartão de Amor / Mensagem Final ---
   loveCard: {
     sectionTitle: string;
     message: string;
@@ -90,6 +138,12 @@ const siteContent: SiteContent = {
     subtitle: "Cada momento contigo é uma página do meu capítulo favorito.",
     ctaText: "Iniciar a nossa jornada",
     backgroundImage: "/images/hero-bg.jpg",
+  },
+
+  counter: {
+    sectionTitle: "Juntos há...",
+    sectionSubtitle: "Cada segundo contigo vale uma eternidade. 💕",
+    startDate: "2021-02-05",
   },
 
   timeline: {
@@ -283,6 +337,101 @@ const siteContent: SiteContent = {
     ],
   },
 
+  loveJar: {
+    sectionTitle: "Potinho de Amor",
+    sectionSubtitle: "Clique no potinho para tirar um bilhetinho especial. 🫙",
+    clickPrompt: "Clique para tirar um bilhete",
+    nextNoteText: "Tirar outro bilhete 💌",
+    notes: [
+      { id: "nota-1", message: "Amo o seu sorriso que ilumina qualquer ambiente." },
+      { id: "nota-2", message: "Amo a forma como você me olha, como se eu fosse a pessoa mais especial do mundo." },
+      { id: "nota-3", message: "Amo a sua gargalhada espontânea que é contagiante." },
+      { id: "nota-4", message: "Amo a sua coragem de ser exatamente quem você é." },
+      { id: "nota-5", message: "Amo como você me faz sentir em casa onde quer que estejamos." },
+      { id: "nota-6", message: "Amo a sua forma de cuidar das pessoas que ama." },
+      { id: "nota-7", message: "Amo quando você diz que me ama do nada, sem motivo." },
+      { id: "nota-8", message: "Amo a sua teimosia (sim, até isso)." },
+      { id: "nota-9", message: "Amo quando você fica animada com coisas pequenas e especiais." },
+      { id: "nota-10", message: "Amo a sua inteligência e a forma como você vê o mundo." },
+      { id: "nota-11", message: "Amo cada abraço seu — eles são o meu lugar favorito." },
+      { id: "nota-12", message: "Amo como você me faz querer ser uma versão melhor de mim mesmo." },
+      { id: "nota-13", message: "Amo a sua cumplicidade. Nós dois somos uma equipa perfeita." },
+      { id: "nota-14", message: "Amo quando você ri tanto que não consegue parar." },
+      { id: "nota-15", message: "Amo cada pequeno momento nosso que se torna memória favorita." },
+      { id: "nota-16", message: "Amo a sua gentileza. Você tem um coração enorme." },
+      { id: "nota-17", message: "Amo acordar sabendo que você existe na minha vida." },
+      { id: "nota-18", message: "Amo sua forma de amar — com tudo que você tem." },
+      { id: "nota-19", message: "Amo que você é minha parceira em todas as aventuras." },
+      { id: "nota-20", message: "Amo você. Simplesmente. Completamente. Para sempre." },
+    ],
+  },
+
+  vouchers: {
+    sectionTitle: "Seus Vales Especiais",
+    sectionSubtitle: "Presentes que você pode resgatar quando quiser. 🎟️",
+    redeemButtonText: "Resgatar",
+    redeemedLabel: "RESGATADO",
+    undoRedeemText: "Devolver vale",
+    vouchers: [
+      {
+        id: "vale-1",
+        icon: "🍽️",
+        title: "Vale Almoço",
+        description: "Um almoço especial em qualquer restaurante que você escolher, sem limites.",
+        color: "#e11d48",
+      },
+      {
+        id: "vale-2",
+        icon: "✈️",
+        title: "Vale Viagem",
+        description: "Uma viagem surpresa para um lugar que você sempre quis conhecer.",
+        color: "#7c3aed",
+      },
+      {
+        id: "vale-3",
+        icon: "💄",
+        title: "Vale Maquiagem",
+        description: "Compras de maquiagem à sua escolha, sem julgamentos e com muito apoio.",
+        color: "#db2777",
+      },
+      {
+        id: "vale-4",
+        icon: "🍿",
+        title: "Vale Cinema",
+        description: "Uma sessão de cinema com pipoca, bebida e o filme que você quiser ver.",
+        color: "#ea580c",
+      },
+      {
+        id: "vale-5",
+        icon: "💆",
+        title: "Vale Spa",
+        description: "Um dia inteiro de spa ou massagem para relaxar e se mimar como merece.",
+        color: "#059669",
+      },
+      {
+        id: "vale-6",
+        icon: "🛍️",
+        title: "Vale Compras",
+        description: "Um dia de compras com o seu personal shopper favorito ao lado.",
+        color: "#0284c7",
+      },
+      {
+        id: "vale-7",
+        icon: "🍕",
+        title: "Vale Pizza em Casa",
+        description: "Uma noite de pizza, filmes e abraços no sofá, do jeitinho que você gosta.",
+        color: "#b45309",
+      },
+      {
+        id: "vale-8",
+        icon: "🌹",
+        title: "Vale Surpresa",
+        description: "Uma surpresa especial preparada com todo o amor. O que será? 🤫",
+        color: "#be185d",
+      },
+    ],
+  },
+
   loveCard: {
     sectionTitle: "Para Ti, Meu Amor",
     message: `Meu amor,
@@ -400,6 +549,13 @@ Amo-te mais do que qualquer palavra poderá algum dia expressar. 💕`,
         artist: "Machine Gun Kelly, YUNGBLUD, blackbear",
         src: "/audio/im-okay.mp3",
         cover: "/images/covers/mgk.jpg",
+      },
+      {
+        id: "musica-16",
+        title: "Adore You",
+        artist: "Harry Styles",
+        src: "/audio/adore-you.mp3",
+        cover: "/images/covers/harry-styles.jpg",
       },
     ],
   },
